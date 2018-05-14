@@ -9,6 +9,8 @@ import java.sql.Statement;
 import java.util.Scanner;
 import utils.Menus;
 import utils.Messages;
+import utils.Queries;
+import utils.Conversor;
 
 public class Main {
 
@@ -79,18 +81,18 @@ public class Main {
     private static void db_conn() {
         String url = "jdbc:mysql://localhost:3306/mkw_db";
         String username = "root";
-        String password = "";
-
-        String queryTest = "SELECT * FROM clan";
+        String password = "";        
 
         try (
                 Connection con = DriverManager.getConnection(url, username, password);
                 Statement stmt = con.createStatement();
-                ResultSet rs = stmt.executeQuery(queryTest);) {
+                ResultSet rs = stmt.executeQuery(Queries.queryTopPlayersList);) {
             while (rs.next()) {
-                String id_departamento = rs.getString("id_clan");
-                String nombre = rs.getString("name");
-                System.out.println(id_departamento + "; " + nombre);
+                String id_departamento = rs.getString("player_name");
+                String nombre = rs.getString("nationality");
+                
+                String time = Conversor.milToTime(rs.getString("time"));
+                System.out.println(id_departamento + "; " + nombre + "; " + time);
             }
         } catch (SQLException ex) {
             while (ex != null) {

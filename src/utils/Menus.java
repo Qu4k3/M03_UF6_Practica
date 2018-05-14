@@ -4,7 +4,7 @@ public class Menus {
 
     public static void menuPrincipal() {
         System.out.println(Colors.ANSI_PURPLE + "- - - - - - - - - - - - - - - - - -"
-                + "\n         Que consulta deseas realizar ?"
+                + "\n     Que consulta deseas realizar ?"
                 + "\n" + Colors.ANSI_PURPLE + "- - - - - - - - - - - - - - - - - -");
         System.out.println(Colors.ANSI_YELLOW + "-Consultar" + Colors.ANSI_RESET);       
         System.out.println("1. Datos del empleado con el máximo salario");
