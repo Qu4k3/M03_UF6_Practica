@@ -1,21 +1,110 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package test;
 
-/**
- *
- * @author paulg
- */
+import java.io.BufferedReader;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.Scanner;
+import utils.Menus;
+import utils.Messages;
+
 public class Main {
 
-    /**
-     * @param args the command line arguments
-     */
+    static Scanner scanner;
+    static BufferedReader br;
+
     public static void main(String[] args) {
-        // TODO code application logic here
+
+        scanner = new Scanner(System.in);
+
+        int numCase;
+        boolean exit = false;
+
+        db_conn();
+
+        do {
+            Menus.menuPrincipal();
+
+            if (!scanner.hasNextInt()) {
+                Messages.inputMustBeInt();
+                break;
+            } else {
+                numCase = scanner.nextInt();
+            }
+
+            switch (numCase) {
+
+                case 1:
+
+                    break;
+
+                case 2:
+
+                    break;
+
+                case 3:
+
+                    break;
+
+                case 4:
+
+                    break;
+
+                case 5:
+                    char secExit;
+                    Messages.exitSec();
+                    Menus.input();
+                    secExit = scanner.next().charAt(0);
+
+                    if (secExit == 's') {
+                        exit = true;
+                        break;
+                    } else {
+                        break;
+                    }
+
+                default:
+                    Messages.optionNotFound();
+                    break;
+            }
+
+            System.out.println(" ");
+
+        } while (exit != true);
+
     }
-    
+
+    private static void db_conn() {
+        String url = "jdbc:mysql://localhost:3306/mkw_db";
+        String username = "root";
+        String password = "";
+
+        String queryTest = "SELECT * FROM clan";
+
+        try (
+                Connection con = DriverManager.getConnection(url, username, password);
+                Statement stmt = con.createStatement();
+                ResultSet rs = stmt.executeQuery(queryTest);) {
+            while (rs.next()) {
+                String id_departamento = rs.getString("id_clan");
+                String nombre = rs.getString("name");
+                System.out.println(id_departamento + "; " + nombre);
+            }
+        } catch (SQLException ex) {
+            while (ex != null) {
+                System.out.println("SQLState: " + ex.getSQLState());
+                System.out.println("Error Code: " + ex.getErrorCode());
+                System.out.println("Message: " + ex.getMessage());
+                Throwable t = ex.getCause();
+                while (t != null) {
+                    System.out.println("Cause: " + t);
+                    t = t.getCause();
+                }
+                ex = ex.getNextException();
+            }
+        }
+    }
+
 }
