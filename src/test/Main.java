@@ -7,6 +7,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Scanner;
+import static utils.Colors.ANSI_CYAN;
+import static utils.Colors.ANSI_RESET;
 import utils.Menus;
 import utils.Messages;
 import utils.Queries;
@@ -47,6 +49,7 @@ public class Main {
                     break;
 
                 case 3:
+                    uploadTime();
 
                     break;
 
@@ -78,10 +81,28 @@ public class Main {
 
     }
 
+    private static void test() {
+
+    }
+
+    private static void uploadTime() {
+
+        String time;
+
+        Messages.askTime();
+        Menus.input();
+
+        time = scanner.next();
+        int timeG = Conversor.TimeToMils(time);
+
+        System.out.println(timeG);
+
+    }
+
     private static void db_conn() {
         String url = "jdbc:mysql://localhost:3306/mkw_db";
         String username = "root";
-        String password = "";        
+        String password = "";
 
         try (
                 Connection con = DriverManager.getConnection(url, username, password);
@@ -90,8 +111,8 @@ public class Main {
             while (rs.next()) {
                 String id_departamento = rs.getString("player_name");
                 String nombre = rs.getString("nationality");
-                
-                String time = Conversor.milToTime(rs.getString("time"));
+
+                String time = Conversor.milsToTime(rs.getString("time"));
                 System.out.println(id_departamento + "; " + nombre + "; " + time);
             }
         } catch (SQLException ex) {

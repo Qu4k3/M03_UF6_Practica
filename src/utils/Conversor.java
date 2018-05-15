@@ -2,32 +2,47 @@ package utils;
 
 public class Conversor {
     
-    String mils;
+    String mils, time;
 
-    public static void milToTime() {
+    public static void milsToTime() {
 
     }        
     
-    public static String milToTime(String mils) {
+    public static String milsToTime(String time) {
         
-        int time, mins, secs;
+        int ms, min, sec;
         
-        time = Integer.parseInt(mils);
+        ms = Integer.parseInt(time);
                 
-        mins = time / 60000;
-        time -= mins * 60000;
-        secs = time / 1000;
-        time -= secs * 1000;        
+        min = ms / 60000;
+        ms -= min * 60000;
+        sec = ms / 1000;
+        ms -= sec * 1000;        
 
-        if (secs < 10) {
-            secs = Integer.parseInt("0" + secs);
+        if (sec < 10) {
+            sec = Integer.parseInt("0" + sec);
         }
-        if (time < 10) {
-            return mins + ":" + secs + ".00" + time;
-        } else if (time < 100) {
-            return mins + ":" + secs + ".0" + time;
+        if (ms < 10) {
+            return min + ":" + sec + ".00" + ms;
+        } else if (ms < 100) {
+            return min + ":" + sec + ".0" + ms;
         } else {
-            return mins + ":" + secs + "." + time;
+            return min + ":" + sec + "." + ms;
         }        
+    }
+    
+    public static int TimeToMils(String time) {
+        
+        int min, sec, ms, res;
+        
+        String[]split = time.split(":|\\.");
+        
+        min = Integer.parseInt(split[0]);
+        sec = Integer.parseInt(split[1]);
+        ms = Integer.parseInt(split[2]);
+        
+        res = min * 60000 + sec * 1000 + ms;
+        
+        return res;
     }
 }

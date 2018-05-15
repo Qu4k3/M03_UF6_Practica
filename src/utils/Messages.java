@@ -1,5 +1,8 @@
 package utils;
 
+import static utils.Colors.ANSI_CYAN;
+import static utils.Colors.ANSI_RESET;
+
 public class Messages {
 
     // --- General ---
@@ -19,25 +22,11 @@ public class Messages {
     public static void inputMustBeInt() {
         System.out.println("\n" + Colors.ANSI_RED + "El valor ha de ser un entero" + Colors.ANSI_RESET);
     }
-
-    // --- Arrays ---
-    /*
-    public static void arrayFilledOk() {
-        System.out.println("\n> " + Colors.ANSI_GREEN + "Datos cargados con éxito" + Colors.ANSI_RESET);
+    
+    // --- Pedir info ---
+    public static void askTime() {
+        System.out.println("\n" + Colors.ANSI_CYAN + "Introduce tiempo en formato correcto (ej: 1:45.789)" + Colors.ANSI_RESET);
     }
-
-    public static void arrayAlreadyFilled() {
-        System.out.println("\n> " + Colors.ANSI_BLUE_BACKGROUND + " Array ya rellenado " + Colors.ANSI_RESET);
-    }
-
-    public static void arrayFillProblem() {
-        System.out.println("\n> " + Colors.ANSI_RED + "Ha habido un problema rellenando el array" + Colors.ANSI_RESET);
-    }
-
-    public static void arrayNotFilled() {
-        System.out.println("\n> " + Colors.ANSI_BLUE_BACKGROUND + " No hay datos, carga primero los datos en el punto 1 " + Colors.ANSI_RESET);
-    }
-    */
 
     // -- Exit ---
     public static void exitSec() {
@@ -57,6 +46,25 @@ public class Messages {
     public static void noData() {
         System.out.println("\n> " + Colors.ANSI_RED + "No hay datos, vuelve a la etapa 1 para introducir datos" + Colors.ANSI_RESET);
     }
+    
+        // --- Arrays ---
+    /*
+    public static void arrayFilledOk() {
+        System.out.println("\n> " + Colors.ANSI_GREEN + "Datos cargados con éxito" + Colors.ANSI_RESET);
+    }
+
+    public static void arrayAlreadyFilled() {
+        System.out.println("\n> " + Colors.ANSI_BLUE_BACKGROUND + " Array ya rellenado " + Colors.ANSI_RESET);
+    }
+
+    public static void arrayFillProblem() {
+        System.out.println("\n> " + Colors.ANSI_RED + "Ha habido un problema rellenando el array" + Colors.ANSI_RESET);
+    }
+
+    public static void arrayNotFilled() {
+        System.out.println("\n> " + Colors.ANSI_BLUE_BACKGROUND + " No hay datos, carga primero los datos en el punto 1 " + Colors.ANSI_RESET);
+    }
+    */
 
     // --- Solicitudes ---
     /*
@@ -93,7 +101,7 @@ public class Messages {
         System.out.println("\n" + Colors.ANSI_CYAN + "// Ingresa temperatura en Celsius" + Colors.ANSI_RESET);
     }
 */
-    
+    /*
     public static void descProduct() {
         System.out.println("\n" + Colors.ANSI_CYAN + "// Descripción del producto" + Colors.ANSI_RESET);
     }
@@ -109,5 +117,5 @@ public class Messages {
     public static void productDropped() {
         System.out.println("> " + Colors.ANSI_GREEN_BACKGROUND + " Eliminado con éxito " + Colors.ANSI_RESET);
     }
-
+*/
 }

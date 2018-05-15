@@ -10,7 +10,7 @@ public class Queries {
 
     public static String queryTopPlayersList = "SELECT p.name AS player_name, p.nationality, r.time, c.logo FROM player p, run r, clan c WHERE r.game_name = 'MK8DX' AND r.game_mode = '150cc' AND r.id_track = '1' AND p.id_player = r.id_player AND p.id_clan = c.id_clan ORDER BY r.time ASC LIMIT 10";
     
-    public static String queryTopPlayersListByClan = "SELECT p.name AS player_name, p.nationality, r.time, c.logo FROM player p, run r, clan c WHERE r.game_name = 'MK8DX' AND r.game_mode = '150cc' AND r.id_track = '1' AND p.id_player = r.id_player AND p.id_clan = c.id_clan AND c.acronym = 'TT' ORDER BY r.time ASC LIMIT 10";    
+    public static String queryTopPlayersListByClan = "SELECT p.name AS player_name, p.nationality, r.time, c.logo FROM player p, run r, clan c WHERE r.game_name = 'MK8DX' AND r.game_mode = '150cc' AND r.id_track = ? AND p.id_player = r.id_player AND p.id_clan = c.id_clan AND c.acronym = ? ORDER BY r.time ASC LIMIT 10";    
 
     public static String queryListClans = "SELECT c.acronym, c.logo, c.name FROM clan c ORDER BY c.acronym";
 }
