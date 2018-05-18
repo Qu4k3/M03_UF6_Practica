@@ -82,6 +82,10 @@ public class Main {
                     listPlayers(url, username, password);
                     break;
 
+                case 9:
+                    listClans(url, username, password);
+                    break;
+
                 case 0:
                     char secExit;
                     Messages.exitSec();
@@ -107,19 +111,17 @@ public class Main {
     }
 
     private static void listTopPlayer(String url, String username, String password) {
-
         int pos = 0;
 
         Messages.askTrack();
         Menus.input();
-        int track = scanner.nextInt();
-        String trackS = Integer.toString(track);
+        String track = Integer.toString(scanner.nextInt());
 
         Messages.result();
         try {
             Connection con = DriverManager.getConnection(url, username, password);
             PreparedStatement pstmt = con.prepareStatement(Queries.queryTopPlayersList);
-            pstmt.setString(1, trackS);
+            pstmt.setString(1, track);
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
                 pos += 1;
@@ -174,7 +176,7 @@ public class Main {
         }
     }
 
-    private static void uploadTime(String url1, String username1, String password1) {
+    private static void uploadTime(String url, String username, String password) {
 
         String time;
         int track, player;
@@ -191,21 +193,159 @@ public class Main {
         Menus.input();
         time = scanner.next();
 
-        int timeG = Conversor.TimeToMils(time);
+        int timeM = Conversor.TimeToMils(time);
 
-        System.out.println("tiempo: " + timeG + "   pista: " + track + "   jugador: " + player);
+        Messages.result();
+        try {
+            Connection con = DriverManager.getConnection(url, username, password);
+            PreparedStatement pstmt = con.prepareStatement(Queries.queryInsertRun);
+            pstmt.setInt(1, player);
+            pstmt.setInt(2, track);
+            pstmt.setInt(3, timeM);
+
+            int r = pstmt.executeUpdate();
+            if (r >= 1) {
+                System.out.println("Se ha añadido correctamente un nuevo tiempo");
+            } else {
+                System.out.println("Ha sucedido algo, vuelve a intentarlo");
+            }
+
+        } catch (SQLException ex) {
+            while (ex != null) {
+                /*System.out.println("SQLState: " + ex.getSQLState());
+                System.out.println("Error Code: " + ex.getErrorCode());*/
+                System.out.println("Message: " + ex.getMessage());
+                Throwable t = ex.getCause();
+                while (t != null) {
+                    System.out.println("Cause: " + t);
+                    t = t.getCause();
+                }
+                ex = ex.getNextException();
+            }
+        }
 
     }
 
     private static void addClan(String url, String username, String password) {
 
+        String name, tag;
+
+        Messages.askClanName();
+        Menus.input();
+        name = scanner.next();
+
+        Messages.askClan();
+        Menus.input();
+        tag = scanner.next();
+
+        Messages.result();
+        try {
+            Connection con = DriverManager.getConnection(url, username, password);
+            PreparedStatement pstmt = con.prepareStatement(Queries.queryNewClan);
+            pstmt.setString(1, name);
+            pstmt.setString(2, tag);
+
+            int r = pstmt.executeUpdate();
+            if (r >= 1) {
+                System.out.println("Se ha añadido correctamente un nuevo clan\ncon nombre " + Colors.ANSI_YELLOW + name + Colors.ANSI_RESET + " y tag " + Colors.ANSI_YELLOW + tag + Colors.ANSI_RESET);
+            } else {
+                System.out.println("Ha sucedido algo, vuelve a intentarlo");
+            }
+
+        } catch (SQLException ex) {
+            while (ex != null) {
+                /*System.out.println("SQLState: " + ex.getSQLState());
+                System.out.println("Error Code: " + ex.getErrorCode());*/
+                System.out.println("Message: " + ex.getMessage());
+                Throwable t = ex.getCause();
+                while (t != null) {
+                    System.out.println("Cause: " + t);
+                    t = t.getCause();
+                }
+                ex = ex.getNextException();
+            }
+        }
+
     }
 
     private static void dropClan(String url, String username, String password) {
 
+        String clan;
+
+        Messages.askClan();
+        Menus.input();
+        clan = scanner.next();
+
+        Messages.result();
+        try {
+            Connection con = DriverManager.getConnection(url, username, password);
+            PreparedStatement pstmt = con.prepareStatement(Queries.queryDropClan);
+            pstmt.setString(1, clan);
+
+            int r = pstmt.executeUpdate();
+            if (r >= 1) {
+                System.out.println("Se borrado correctamente el clan " + clan);
+            } else {
+                System.out.println("Ha sucedido algo, vuelve a intentarlo");
+            }
+
+        } catch (SQLException ex) {
+            while (ex != null) {
+                /*System.out.println("SQLState: " + ex.getSQLState());
+                System.out.println("Error Code: " + ex.getErrorCode());*/
+                System.out.println("Message: " + ex.getMessage());
+                Throwable t = ex.getCause();
+                while (t != null) {
+                    System.out.println("Cause: " + t);
+                    t = t.getCause();
+                }
+                ex = ex.getNextException();
+            }
+        }
+
     }
 
     private static void editPlayer(String url, String username, String password) {
+
+        int clan_aux;
+        String clan, player;
+
+        Messages.askClanId();
+        Menus.input();
+        clan_aux = scanner.nextInt();
+        clan = Integer.toString(clan_aux);
+
+        Messages.askPlayer();
+        Menus.input();
+        player = Integer.toString(scanner.nextInt());
+
+        Messages.result();
+        try {
+            Connection con = DriverManager.getConnection(url, username, password);
+            PreparedStatement pstmt = con.prepareStatement(Queries.queryUpdatePlayerClan);
+            pstmt.setString(1, clan);
+            pstmt.setString(2, player);
+
+            int r = pstmt.executeUpdate();
+            if (r >= 1) {
+                System.out.println("Se ha movido correctamente el jugador " + Colors.ANSI_YELLOW + player + Colors.ANSI_RESET + " a " + Colors.ANSI_YELLOW + clan_aux + Colors.ANSI_RESET);
+            } else {
+                System.out.println("Ha sucedido algo, vuelve a intentarlo");
+            }
+
+        } catch (SQLException ex) {
+            while (ex != null) {
+                /*System.out.println("SQLState: " + ex.getSQLState());
+                System.out.println("Error Code: " + ex.getErrorCode());*/
+                System.out.println("Message: " + ex.getMessage());
+                Throwable t = ex.getCause();
+                while (t != null) {
+                    System.out.println("Cause: " + t);
+                    t = t.getCause();
+                }
+                ex = ex.getNextException();
+            }
+        }
 
     }
 
@@ -252,6 +392,35 @@ public class Main {
                 String acronym = rs.getString("acronym");
                 String nombre = rs.getString("name");
                 System.out.println(id_player + " - " + acronym + "(" + id_clan + ") - " + nombre);
+            }
+        } catch (SQLException ex) {
+            while (ex != null) {
+                /*System.out.println("SQLState: " + ex.getSQLState());
+                System.out.println("Error Code: " + ex.getErrorCode());*/
+                System.out.println("Message: " + ex.getMessage());
+                Throwable t = ex.getCause();
+                while (t != null) {
+                    System.out.println("Cause: " + t);
+                    t = t.getCause();
+                }
+                ex = ex.getNextException();
+            }
+        }
+    }
+
+    private static void listClans(String url, String username, String password) {
+
+        Messages.result();
+
+        try (
+                Connection con = DriverManager.getConnection(url, username, password);
+                Statement stmt = con.createStatement();
+                ResultSet rs = stmt.executeQuery(Queries.queryListClans);) {
+            while (rs.next()) {
+                String name = rs.getString("name");
+                String acronym = rs.getString("acronym");
+                String id_clan = rs.getString("id_clan");
+                System.out.println(name + " - " + acronym + "(" + id_clan + ")");
             }
         } catch (SQLException ex) {
             while (ex != null) {

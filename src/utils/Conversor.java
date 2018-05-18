@@ -17,17 +17,23 @@ public class Conversor {
         min = ms / 60000;
         ms -= min * 60000;
         sec = ms / 1000;
-        ms -= sec * 1000;        
+        ms -= sec * 1000;  
+        
+        String msS, minS, secS;
+        
+        msS = Integer.toString(ms);
+        minS = Integer.toString(min);
+        secS = Integer.toString(sec);
 
         if (sec < 10) {
-            sec = Integer.parseInt("0" + sec);
+            secS = "0" + sec;
         }
         if (ms < 10) {
-            return min + ":" + sec + ".00" + ms;
+            return minS + ":" + secS + ".00" + msS;
         } else if (ms < 100) {
-            return min + ":" + sec + ".0" + ms;
+            return minS + ":" + secS + ".0" + msS;
         } else {
-            return min + ":" + sec + "." + ms;
+            return minS + ":" + secS + "." + msS;
         }        
     }
     

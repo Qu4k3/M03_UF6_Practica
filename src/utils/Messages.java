@@ -42,6 +42,20 @@ public class Messages {
         System.out.println("\n" + Colors.ANSI_CYAN + "// Indica id del jugador" + Colors.ANSI_RESET);
     }
     
+    public static void askClanName() {
+        System.out.println("\n" + Colors.ANSI_CYAN + "// Indica nombre del clan" + Colors.ANSI_RESET);
+    }
+
+public static void askClan() {
+        System.out.println("\n" + Colors.ANSI_CYAN + "// Indica abreviacion del clan" + Colors.ANSI_RESET);
+    }    
+    
+    public static void askClanId() {
+        System.out.println("\n" + Colors.ANSI_CYAN + "// Indica id del clan a traspasar" + Colors.ANSI_RESET);
+    }
+    
+    
+    
     public static void askTime() {
         System.out.println("\n" + Colors.ANSI_CYAN + "// Introduce el tiempo (formato 1:23.456)" + Colors.ANSI_RESET);
     }
