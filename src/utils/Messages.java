@@ -22,15 +22,28 @@ public class Messages {
     public static void inputMustBeInt() {
         System.out.println("\n" + Colors.ANSI_RED + "El valor ha de ser un entero" + Colors.ANSI_RESET);
     }
-    
-    // --- Pedir info ---
-    public static void askTime() {
-        System.out.println("\n" + Colors.ANSI_CYAN + "Introduce tiempo en formato correcto (ej: 1:45.789)" + Colors.ANSI_RESET);
-    }
 
     // -- Exit ---
     public static void exitSec() {
         System.out.println("\n" + Colors.ANSI_PURPLE_BACKGROUND + " Seguro quieres salir? (s/n) " + Colors.ANSI_RESET);
+    }
+    
+    // -- Result ---
+    public static void result() {
+        System.out.println("\n" + Colors.ANSI_YELLOW + "Resultado\n---------" + Colors.ANSI_RESET);
+    }
+    
+    // --- Pedir info ---
+    public static void askTrack() {
+        System.out.println("\n" + Colors.ANSI_CYAN + "// Indica id de la pista" + Colors.ANSI_RESET);
+    }
+    
+    public static void askPlayer() {
+        System.out.println("\n" + Colors.ANSI_CYAN + "// Indica id del jugador" + Colors.ANSI_RESET);
+    }
+    
+    public static void askTime() {
+        System.out.println("\n" + Colors.ANSI_CYAN + "// Introduce el tiempo (formato 1:23.456)" + Colors.ANSI_RESET);
     }
 
     // --- Menu ---
