@@ -105,7 +105,7 @@ public class Main {
         } while (exit != true);
 
     }
-    
+
     private static void listTopPlayer(String url, String username, String password) {
 
         int pos = 0;
@@ -113,18 +113,19 @@ public class Main {
         Messages.askTrack();
         Menus.input();
         int track = scanner.nextInt();
+        String trackS = Integer.toString(track);
 
         Messages.result();
         try {
             Connection con = DriverManager.getConnection(url, username, password);
             PreparedStatement pstmt = con.prepareStatement(Queries.queryTopPlayersList);
-            pstmt.setString(1, " + track + ");
+            pstmt.setString(1, trackS);
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
                 pos += 1;
                 String nombre = rs.getString("player_name");
-                String totalTime = Conversor.milsToTime(rs.getString("tiempo_total"));
-                System.out.println(pos + " - " + nombre + " - " + totalTime);
+                String time = Conversor.milsToTime(rs.getString("time"));
+                System.out.println(pos + " - " + nombre + " - " + time);
             }
         } catch (SQLException ex) {
             while (ex != null) {
@@ -141,7 +142,7 @@ public class Main {
         }
 
     }
-    
+
     private static void listTotalTime(String url, String username, String password) {
 
         Messages.result();
@@ -177,47 +178,36 @@ public class Main {
 
         String time;
         int track, player;
-        
+
         Messages.askTrack();
         Menus.input();
         track = scanner.nextInt();
 
         Messages.askPlayer();
         Menus.input();
-        player = scanner.nextInt();        
+        player = scanner.nextInt();
 
         Messages.askTime();
         Menus.input();
         time = scanner.next();
-        
-        
-        
-        
-        
-        
+
         int timeG = Conversor.TimeToMils(time);
 
-        System.out.println("tiempo: " + timeG + "   pista: " + track + "   jugador: "  + player);
+        System.out.println("tiempo: " + timeG + "   pista: " + track + "   jugador: " + player);
 
-    } 
-    
-    
+    }
+
     private static void addClan(String url, String username, String password) {
-        
+
     }
-    
-    
+
     private static void dropClan(String url, String username, String password) {
-        
+
     }
-    
-    
+
     private static void editPlayer(String url, String username, String password) {
-        
-    }   
-    
-    
-    
+
+    }
 
     private static void listTracks(String url, String username, String password) {
 
@@ -257,9 +247,11 @@ public class Main {
                 Statement stmt = con.createStatement();
                 ResultSet rs = stmt.executeQuery(Queries.queryPlayers);) {
             while (rs.next()) {
-                String id_departamento = rs.getString("id_player");
+                String id_player = rs.getString("id_player");
+                String id_clan = rs.getString("id_clan");
+                String acronym = rs.getString("acronym");
                 String nombre = rs.getString("name");
-                System.out.println(id_departamento + " - " + nombre);
+                System.out.println(id_player + " - " + acronym + "(" + id_clan + ") - " + nombre);
             }
         } catch (SQLException ex) {
             while (ex != null) {
@@ -276,7 +268,4 @@ public class Main {
         }
     }
 
-    
-
-    
 }

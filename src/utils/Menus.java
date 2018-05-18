@@ -7,8 +7,8 @@ public class Menus {
                 + "\n    Que acción deseas realizar ?"
                 + "\n" + Colors.ANSI_PURPLE + "- - - - - - - - - - - - - - - - - -");
         System.out.println(Colors.ANSI_YELLOW + "-Consultar" + Colors.ANSI_RESET);       
-        System.out.println("1. Tops españoles por pista");
-        System.out.println("2. Tops españoles tiempo total");
+        System.out.println("1. Top 10 por pista");
+        System.out.println("2. Top 25 por tiempo total");
         System.out.println("");
         System.out.println(Colors.ANSI_YELLOW + "-Tiempos" + Colors.ANSI_RESET);
         System.out.println("3. Añadir tiempo");
